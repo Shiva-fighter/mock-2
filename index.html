@@ -13,7 +13,8 @@
 </body>
 </html>
 <script>
-let new_arr = [];
+  
+let new_arr = JSON.parse(localStorage.getItem("store")) || [];
 var contain = document.getElementById("main_div");
 
    // let main_div = document.getElementById("main_div")
@@ -43,28 +44,31 @@ function appendProduct(arr){
        // let div1 = document.createElement("div");
 
  
-       
+       var div1 = document.createElement("div");
+       var test ;
         let breed = document.createElement("p");
-        breed.innerText = Object.keys(el).map((key, id) => key);
-        new_arr.push(breed);
-       
-        console.log(new_arr);
-        
+        breed.innerText = Object.keys(el).map((key) =>{
+           
+             test = document.createElement("p");
+            test.innerText= key;
+            console.log(test);
+            div1.append(test);
 
-        
-
-        breed.addEventListener("click", function(){
-            console.log(breed)
-            window.location.href = "puppy.html";
-        })
-        //   new_arr.forEach((ele, ind)=>{
-        //     console.log(ele, ind);
-        //   })
-            
-           // 
-      
+           
+        } );
+    //    function appendData(){
+    //     new_arr.push(test);
+    //     console.log(new_arr);
+    //    }
+    div1.addEventListener("click", function(){
+                console.log("helo")
+                new_arr.push(test);
+                 localStorage.setItem("store", JSON.stringify(new_arr));
+                
+                window.location.href = "puppy.html";
+            })
        
-        div.append(breed);
+        div.append(div1);
         contain.append(div);
 
     })
