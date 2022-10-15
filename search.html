@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #contain{
+
+            border: 1px solid black;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+    </style>
+</head>
+<body>
+    
+    <div>
+        <input type="text" id = "search_text">
+        <button id = "btn" >search</button>
+        
+    </div>
+    <div id = "container">
+
+    </div>
+</body>
+</html>
+<script>
+let contain = document.getElementById("container");
+let btn_val = document.getElementById("btn");
+btn_val.addEventListener("click", function(){
+    showData();
+})
+var data = [];
+async function showData(){
+    let breedname = document.getElementById("search_text").value;
+    let url = `https://dog.ceo/api/breed/${breedname}/images`
+    let response =await  fetch(url);
+
+    let data =await response.json();
+   // console.log(data.message);
+
+    let array = [];
+    array.push(data.message);
+    apeendPic(array);
+}
+function apeendPic(arr){
+    
+    arr.forEach(function(el, ind){
+        console.log("value",el);
+        let div = document.createElement("div");
+        let img = document.createElement("img");
+        img.src = el[ind];
+        console.log()
+
+        div.append(img);
+        contain.append(div);
+
+    })
+}
+
+
+</script>
